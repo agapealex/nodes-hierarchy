@@ -1,18 +1,35 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
 import StyledMain from "./main.style";
 import Node from "../Node/node";
-import { formatAsDomData } from "./helpers";
+import { formatAsTreeData } from "./helpers";
+
+const recursion = (node) => {
+  return (
+    <Node x={node}>
+      {node.children.length !== 0 && (
+        <>{node.children.map((child) => recursion(child))}</>
+      )}
+    </Node>
+  );
+};
 
 function Main() {
-  const list = [1, 2, 3];
+  const dispatch = useDispatch();
 
-  formatAsDomData();
+  const list = useSelector((state) => state.xReducer.list);
+
+  useEffect(() => {
+    dispatch({
+      type: "DATA",
+      payload: formatAsTreeData(),
+    });
+  }, []);
 
   return (
     <StyledMain>
-      {list.map((x) => (
-        <Node x={x} />
-      ))}
+      <>{list && list.length !== 0 && list.map((x) => recursion(x))}</>
     </StyledMain>
   );
 }

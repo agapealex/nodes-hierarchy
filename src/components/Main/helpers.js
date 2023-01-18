@@ -53,12 +53,12 @@ const data = {
   ],
 };
 
-const recursive = (initialNodes, currentValue, accumulator) => {
+const getRecursionNodes = (initialNodes, currentValue, accumulator) => {
 
     const children = initialNodes.filter( node => node.parent_node === currentValue.id)
 
     let allChildren = children.map(child=>{
-        return recursive(initialNodes, child, accumulator)
+        return getRecursionNodes(initialNodes, child, accumulator)
     })
 
     return {
@@ -67,17 +67,17 @@ const recursive = (initialNodes, currentValue, accumulator) => {
     };
 };
 
-export const formatAsDomData = () => {//data
+export const formatAsTreeData = () => {//data
     
     const accumulator = []
 
     data.nodes.forEach(node => {
         if(node.parent_node === null){
-            accumulator.push(recursive(data.nodes, node, accumulator))
+            accumulator.push(getRecursionNodes(data.nodes, node, accumulator))
         }
 
     });
 
 
-    console.log(accumulator, "++++")
+    return accumulator;
 };

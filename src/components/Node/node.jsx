@@ -1,11 +1,19 @@
 import React from 'react';
 import StyledNode from './node.style';
 
-function Node({x}){
+function Node({x, children}){
+
+    // const removeNode = () =>{
+
+    // }
     return (
         <StyledNode>
-            <div className='expand'>f</div>
-            <div className="ceva">{x}</div>
+            <div className='ggg'>
+                <div className='expand'>f</div>
+                <div className="ceva">{x.id}</div>
+                {/* <button onClick={()=>{}}> delete</button> */}
+            </div>
+            {children}
         </StyledNode>
     )
 }
