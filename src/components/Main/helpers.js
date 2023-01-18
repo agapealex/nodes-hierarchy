@@ -57,42 +57,23 @@ const recursive = (initialNodes, currentValue, accumulator) => {
 
     const children = initialNodes.filter( node => node.parent_node === currentValue.id)
 
-    // const ceva = children.map(child => recursive(initialNodes, child));
+    let allChildren = children.map(child=>{
+        return recursive(initialNodes, child, accumulator)
+    })
 
-    children.reduce((acc, child) =>{
-
-        acc.push(recursive(initialNodes, child, acc))
-        return acc
-    }, accumulator)
-    // console.log(ceva,"vfff")
-
-    //un array de child
     return {
-        // id: "1",
-        // name: "name",
-        // parent: "fff",
         ...currentValue,
-        children,
+        children: allChildren,
     };
 };
 
 export const formatAsDomData = () => {//data
-  let newData = [];
-
-//   const final = data.nodes.reduce((accumulator, currentValue, currentIndex, initialNodes) => {
-
-//     if (!currentValue.parent_node) {
-//       accumulator.push(recursive(initialNodes, currentValue, accumulator));
-//     }
-
-//     return accumulator;
-//   }, newData);
-
-    const accumulator = []
     
+    const accumulator = []
+
     data.nodes.forEach(node => {
-        if(!node.parent_node){
-            return recursive(data.nodes, node, accumulator)
+        if(node.parent_node === null){
+            accumulator.push(recursive(data.nodes, node, accumulator))
         }
 
     });
