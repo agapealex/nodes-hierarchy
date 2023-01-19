@@ -1,4 +1,4 @@
-const data = {
+export const data = {
   nodes: [
     {
       id: 1,
@@ -53,50 +53,35 @@ const data = {
   ],
 };
 
-const recursive = (initialNodes, currentValue, accumulator) => {
+const getRecursionNodes = (initialNodes, currentValue, accumulator) => {
+  const children = initialNodes.filter(
+    (node) => node.parent_node === currentValue.id
+  );
 
-    const children = initialNodes.filter( node => node.parent_node === currentValue.id)
+  let allChildren = children.map((child) => {
+    return getRecursionNodes(initialNodes, child, accumulator);
+  });
 
-    // const ceva = children.map(child => recursive(initialNodes, child));
-
-    children.reduce((acc, child) =>{
-
-        acc.push(recursive(initialNodes, child, acc))
-        return acc
-    }, accumulator)
-    // console.log(ceva,"vfff")
-
-    //un array de child
-    return {
-        // id: "1",
-        // name: "name",
-        // parent: "fff",
-        ...currentValue,
-        children,
-    };
+  return {
+    ...currentValue,
+    children: allChildren,
+  };
 };
 
-export const formatAsDomData = () => {//data
-  let newData = [];
+export const formatAsTreeData = (data) => {
+  //data
 
-//   const final = data.nodes.reduce((accumulator, currentValue, currentIndex, initialNodes) => {
+  const accumulator = [];
 
-//     if (!currentValue.parent_node) {
-//       accumulator.push(recursive(initialNodes, currentValue, accumulator));
-//     }
+  // console.log(data)
 
-//     return accumulator;
-//   }, newData);
+  data &&
+  data.nodes &&
+  data.nodes.forEach((node) => {
+    if (node.parent_node === null) {
+      accumulator.push(getRecursionNodes(data.nodes, node, accumulator));
+    }
+  });
 
-    const accumulator = []
-    
-    data.nodes.forEach(node => {
-        if(!node.parent_node){
-            return recursive(data.nodes, node, accumulator)
-        }
-
-    });
-
-
-    console.log(accumulator, "++++")
+  return accumulator;
 };
