@@ -1,3 +1,5 @@
+import uuid from "react-uuid";
+
 const initialState = {
   initialList: {},
   listAsTree: []
@@ -18,6 +20,7 @@ const recursion = (mainNode, nodeToDelete, newInitialList) => {
     recursion(child, nodeToDelete, newInitialList)
   );
 };
+
 function xReducer(state = initialState, action) {
   switch (action.type) {
     case "GET_ DATA":
@@ -34,13 +37,25 @@ function xReducer(state = initialState, action) {
       let newInitialList = {
         nodes: [],
       };
-
       let copyListAsTree = structuredClone(state.listAsTree);
 
       copyListAsTree.map((node) => recursion(node, action.payload.node, newInitialList));
       return {
         ...state,
         initialList: newInitialList
+      };
+    case "ADD":
+        let newList = structuredClone(state.initialList);
+
+        newList.nodes.push({
+          id: uuid(),
+          name: "new node",
+          parent_node: action.payload.node.id
+        })
+
+      return {
+        ...state,
+        initialList: newList,
       };
     default:
       return state;

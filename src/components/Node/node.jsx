@@ -15,12 +15,22 @@ function Node({ node, children }) {
       },
     });
   };
-  
+
+  const addNode = (node) => {
+    dispatch({
+      type: "ADD",
+      payload: {
+        node,
+      },
+    });
+  };
+
   return (
     <StyledNode>
       <div className="node">
         <div className="expand-node">f</div>
         <div className="node-details">{node.id}</div>
+        <button onClick={() => addNode(node)}> add</button>
         <button onClick={() => removeNode(node)}> delete</button>
       </div>
       {children}
