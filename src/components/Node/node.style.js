@@ -20,6 +20,9 @@ const StyledNode = styled.div`
     height: 30px;
     width: 100%;
   }
+
+  .children{
+  }
 `;
 
 export default StyledNode;
