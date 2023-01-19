@@ -3,11 +3,11 @@ import { useSelector, useDispatch } from "react-redux";
 
 import StyledMain from "./main.style";
 import Node from "../Node/node";
-import { formatAsTreeData } from "./helpers";
+import { formatAsTreeData, data } from "./helpers";
 
 const recursion = (node) => {
   return (
-    <Node x={node}>
+    <Node node={node}>
       {node.children.length !== 0 && (
         <>{node.children.map((child) => recursion(child))}</>
       )}
@@ -15,21 +15,35 @@ const recursion = (node) => {
   );
 };
 
-function Main() {
-  const dispatch = useDispatch();
+function Main({}) {
+    
+  const initialList = useSelector((state) => state.xReducer.initialList);
+  const list = useSelector((state) => state.xReducer.listAsTree);
 
-  const list = useSelector((state) => state.xReducer.list);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch({
-      type: "DATA",
-      payload: formatAsTreeData(),
+      type: "GET_ DATA",
+      payload: {
+        initialList: data,
+      },
     });
   }, []);
 
+  useEffect(() => {
+
+    dispatch({
+      type: "FORMAT_ DATA",
+      payload: {
+        listAsTree: formatAsTreeData(initialList),
+      },
+    });
+  }, [initialList]);
+
   return (
     <StyledMain>
-      <>{list && list.length !== 0 && list.map((x) => recursion(x))}</>
+      {list && list.length !== 0 && list.map((x) => recursion(x))}
     </StyledMain>
   );
 }

@@ -1,4 +1,4 @@
-const data = {
+export const data = {
   nodes: [
     {
       id: 1,
@@ -54,30 +54,34 @@ const data = {
 };
 
 const getRecursionNodes = (initialNodes, currentValue, accumulator) => {
+  const children = initialNodes.filter(
+    (node) => node.parent_node === currentValue.id
+  );
 
-    const children = initialNodes.filter( node => node.parent_node === currentValue.id)
+  let allChildren = children.map((child) => {
+    return getRecursionNodes(initialNodes, child, accumulator);
+  });
 
-    let allChildren = children.map(child=>{
-        return getRecursionNodes(initialNodes, child, accumulator)
-    })
-
-    return {
-        ...currentValue,
-        children: allChildren,
-    };
+  return {
+    ...currentValue,
+    children: allChildren,
+  };
 };
 
-export const formatAsTreeData = () => {//data
-    
-    const accumulator = []
+export const formatAsTreeData = (data) => {
+  //data
 
-    data.nodes.forEach(node => {
-        if(node.parent_node === null){
-            accumulator.push(getRecursionNodes(data.nodes, node, accumulator))
-        }
+  const accumulator = [];
 
-    });
+  // console.log(data)
 
+  data &&
+  data.nodes &&
+  data.nodes.forEach((node) => {
+    if (node.parent_node === null) {
+      accumulator.push(getRecursionNodes(data.nodes, node, accumulator));
+    }
+  });
 
-    return accumulator;
+  return accumulator;
 };

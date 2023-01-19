@@ -1,21 +1,31 @@
-import React from 'react';
-import StyledNode from './node.style';
+import React from "react";
+import StyledNode from "./node.style";
+import { useSelector, useDispatch } from "react-redux";
 
-function Node({x, children}){
+function Node({ node, children }) {
+  // const list = useSelector((state) => state.xReducer.listAsTree);
 
-    // const removeNode = () =>{
+  const dispatch = useDispatch();
 
-    // }
-    return (
-        <StyledNode>
-            <div className='ggg'>
-                <div className='expand'>f</div>
-                <div className="ceva">{x.id}</div>
-                {/* <button onClick={()=>{}}> delete</button> */}
-            </div>
-            {children}
-        </StyledNode>
-    )
+  const removeNode = (node) => {
+    dispatch({
+      type: "DELETE",
+      payload: {
+        node,
+      },
+    });
+  };
+  
+  return (
+    <StyledNode>
+      <div className="node">
+        <div className="expand-node">f</div>
+        <div className="node-details">{node.id}</div>
+        <button onClick={() => removeNode(node)}> delete</button>
+      </div>
+      {children}
+    </StyledNode>
+  );
 }
 
 export default Node;

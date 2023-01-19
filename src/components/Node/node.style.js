@@ -4,17 +4,17 @@ const StyledNode = styled.div`
 
   padding-left: 50px;
 
-  .ggg {
+  .node {
     display: flex;
   }
 
-  .expand {
+  .expand-node {
     width: 50px;
     background-color: red;
     margin: 10px 0 10px 0;
   }
 
-  .ceva {
+  .node-details {
     background-color: green;
     margin: 10px 0 10px 0;
     height: 30px;
