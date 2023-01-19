@@ -1,4 +1,5 @@
 import uuid from "react-uuid";
+import { ADD, DELETE, EDIT } from '../common/constants';
 
 const initialState = {
   initialList: {},
@@ -39,7 +40,7 @@ function xReducer(state = initialState, action) {
         listAsTree: action.payload.listAsTree,
       };
 
-    case "DELETE":
+    case DELETE:
       let copyListAsTree = structuredClone(state.listAsTree);
 
       copyListAsTree.map((node) =>
@@ -50,12 +51,12 @@ function xReducer(state = initialState, action) {
         initialList: newInitialList,
       };
 
-    case "ADD":
+    case ADD:
       newInitialList = structuredClone(state.initialList);
 
       newInitialList.nodes.push({
         id: uuid(),
-        name: "new node",
+        name: action.payload.node.newChildName,
         parent_node: action.payload.node.id,
       });
 
@@ -63,7 +64,7 @@ function xReducer(state = initialState, action) {
         ...state,
         initialList: newInitialList,
       };
-    case "EDIT":
+    case EDIT:
       newInitialList = structuredClone(state.initialList);
 
       newInitialList.nodes.length > 0 &&
