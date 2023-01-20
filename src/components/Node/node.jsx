@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import StyledNode from "./node.style";
 import { useDispatch } from "react-redux";
 import ActionModal from "../Modal/actionModal";
+import * as Icon from "react-bootstrap-icons";
 
 import { ADD, DELETE, EDIT } from "../../common/constants";
 import { getNumberOfChildren } from "./helpers";
@@ -70,21 +71,20 @@ function Node({ node, children }) {
   return (
     <StyledNode>
       <div
-        className="modal show"
+        className=" show"
         style={{ display: "block", position: "static", overflow: "inherit" }}
       >
         <div className="node">
           <div className="expand-node" onClick={() => expandNode()}>
-            f
+            {numberOfChildren.number > 0 ? isExpanded ? <Icon.DashCircleFill /> : <Icon.PlusCircleFill /> : ""} 
           </div>
           <div className="node-details">
-            {node.name} - {numberOfChildren.number}
+            <div className="node-name">{node.name}</div>
+            <div className="number-children">{numberOfChildren.number} nodes under</div>
+            <Menu changeTree={changeTree} />
           </div>
-          <Menu
-            changeTree={changeTree}
-          />
         </div>
-        
+
         {isExpanded && <div className="children">{children}</div>}
 
         <ActionModal
