@@ -71,21 +71,31 @@ function Node({ node, children }) {
   return (
     <StyledNode>
       <div
-        className=" show"
+        className="node-container show"
         style={{ display: "block", position: "static", overflow: "inherit" }}
       >
         <div className="node">
           <div className="expand-node" onClick={() => expandNode()}>
-            {numberOfChildren.number > 0 ? isExpanded ? <Icon.DashCircleFill /> : <Icon.PlusCircleFill /> : ""} 
+            {numberOfChildren.number > 0 ? (
+              isExpanded ? (
+                <Icon.DashCircleFill />
+              ) : (
+                <Icon.PlusCircleFill />
+              )
+            ) : (
+              ""
+            )}
           </div>
           <div className="node-details">
             <div className="node-name">{node.name}</div>
-            <div className="number-children">{numberOfChildren.number} nodes under</div>
+            <div className="number-children">
+              {numberOfChildren.number} nodes under
+            </div>
             <Menu changeTree={changeTree} />
           </div>
         </div>
 
-        {isExpanded && <div className="children">{children}</div>}
+        {isExpanded && <ul className="children">{children}</ul>}
 
         <ActionModal
           handleClose={handleClose}

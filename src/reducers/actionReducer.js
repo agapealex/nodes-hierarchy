@@ -6,7 +6,7 @@ const initialState = {
   listAsTree: [],
 };
 
-const recursion = (mainNode, nodeToDelete, newInitialList) => {
+const removeNode = (mainNode, nodeToDelete, newInitialList) => {
   if (mainNode.id === nodeToDelete.id) {
     mainNode.children = [];
   } else {
@@ -18,11 +18,11 @@ const recursion = (mainNode, nodeToDelete, newInitialList) => {
   }
 
   mainNode.children.forEach((child) =>
-    recursion(child, nodeToDelete, newInitialList)
+    removeNode(child, nodeToDelete, newInitialList)
   );
 };
 
-function xReducer(state = initialState, action) {
+function actionReducer(state = initialState, action) {
   let newInitialList = {
     nodes: [],
   };
@@ -44,7 +44,7 @@ function xReducer(state = initialState, action) {
       let copyListAsTree = structuredClone(state.listAsTree);
 
       copyListAsTree.map((node) =>
-        recursion(node, action.payload.node, newInitialList)
+        removeNode(node, action.payload.node, newInitialList)
       );
       return {
         ...state,
@@ -83,4 +83,4 @@ function xReducer(state = initialState, action) {
   }
 }
 
-export default xReducer;
+export default actionReducer;

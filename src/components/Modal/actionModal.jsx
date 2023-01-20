@@ -3,7 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
-import { ADD, DELETE, EDIT } from "../../common/constants";
+import { ADD, EDIT } from "../../common/constants";
 
 const ActionModal = ({ handleAction, handleClose, actionName, show }) => {
   const [nameValue, setNameValue] = useState("");

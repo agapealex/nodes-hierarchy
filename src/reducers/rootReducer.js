@@ -1,10 +1,7 @@
-import React from "react";
-import { combineReducers } from "redux";
-import xReducer from './xReducer';
-
+import actionReducer from './actionReducer';
 
 export const rootReducer =  ({
     reducer: {
-        xReducer,
+        actionReducer,
     }
 })

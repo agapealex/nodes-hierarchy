@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import StyledMain from "./main.style";
@@ -17,9 +17,8 @@ const recursion = (node) => {
 
 function Main({}) {
     
-  const initialList = useSelector((state) => state.xReducer.initialList);
-  const list = useSelector((state) => state.xReducer.listAsTree);
-
+  const initialList = useSelector((state) => state.actionReducer.initialList);
+  const list = useSelector((state) => state.actionReducer.listAsTree);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -32,7 +31,6 @@ function Main({}) {
   }, []);
 
   useEffect(() => {
-
     dispatch({
       type: "FORMAT_ DATA",
       payload: {
@@ -43,7 +41,9 @@ function Main({}) {
 
   return (
     <StyledMain>
-      {list && list.length !== 0 && list.map((x) => recursion(x))}
+      <ul>
+        {list && list.length !== 0 && list.map((x) => recursion(x))}
+      </ul>
     </StyledMain>
   );
 }

@@ -69,19 +69,15 @@ const getRecursionNodes = (initialNodes, currentValue, accumulator) => {
 };
 
 export const formatAsTreeData = (data) => {
-  //data
-
   const accumulator = [];
 
-  // console.log(data)
-
   data &&
-  data.nodes &&
-  data.nodes.forEach((node) => {
-    if (node.parent_node === null) {
-      accumulator.push(getRecursionNodes(data.nodes, node, accumulator));
-    }
-  });
+    data.nodes &&
+    data.nodes.forEach((node) => {
+      if (node.parent_node === null) {
+        accumulator.push(getRecursionNodes(data.nodes, node, accumulator));
+      }
+    });
 
   return accumulator;
 };
