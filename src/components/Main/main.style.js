@@ -1,12 +1,8 @@
 import styled from 'styled-components';
 
 const StyledMain = styled.div`
-    border: solid 1px;
-
-    padding: 30px;
-
+    padding: 0 30px 0 0;
     width: 800px;
-
 `
 
 export default StyledMain;

@@ -1,29 +1,99 @@
-import React from "react";
+import React, { useState } from "react";
 import StyledNode from "./node.style";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import ActionModal from "../Modal/actionModal";
+import * as Icon from "react-bootstrap-icons";
+
+import { ADD, DELETE, EDIT } from "../../common/constants";
+import { getNumberOfChildren } from "./helpers";
+import Menu from "../Menu/menu";
 
 function Node({ node, children }) {
-  // const list = useSelector((state) => state.xReducer.listAsTree);
+  const [isExpanded, setIsExpanded] = useState(true);
+  const [show, setShow] = useState(false);
+  const [handleAction, setHandleAction] = useState(() => {});
+  const [actionName, setActionName] = useState("");
 
   const dispatch = useDispatch();
+  const handleClose = () => setShow(false);
 
-  const removeNode = (node) => {
-    dispatch({
-      type: "DELETE",
-      payload: {
-        node,
-      },
-    });
+  const dispatchAction = (actionName, node) => {
+    return () => {
+      dispatch({
+        type: actionName,
+        payload: {
+          node,
+        },
+      });
+
+      setShow(false);
+    };
   };
-  
+
+  const editNode = (nodeName) => {
+    let updatedNode = structuredClone(node);
+    updatedNode.name = nodeName;
+
+    dispatchAction(EDIT, updatedNode)();
+  };
+
+  const addNode = (nodeName) => {
+    let updatedNode = structuredClone(node);
+    updatedNode.newChildName = nodeName;
+
+    dispatchAction(ADD, updatedNode)();
+  };
+
+  const expandNode = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  const changeTree = (actionName) => {
+    setActionName(actionName);
+    setShow(true);
+
+    if (actionName === DELETE)
+      return setHandleAction(() => dispatchAction(actionName, node));
+    // it is calling action if is not a callback
+    else if (actionName === ADD) {
+      return setHandleAction(() => addNode);
+    } else if (actionName === EDIT) {
+      return setHandleAction(() => editNode);
+    }
+  };
+
+  let numberOfChildren = {
+    number: 0,
+  };
+
+  getNumberOfChildren(node, numberOfChildren);
+
   return (
     <StyledNode>
-      <div className="node">
-        <div className="expand-node">f</div>
-        <div className="node-details">{node.id}</div>
-        <button onClick={() => removeNode(node)}> delete</button>
+      <div
+        className=" show"
+        style={{ display: "block", position: "static", overflow: "inherit" }}
+      >
+        <div className="node">
+          <div className="expand-node" onClick={() => expandNode()}>
+            {numberOfChildren.number > 0 ? isExpanded ? <Icon.DashCircleFill /> : <Icon.PlusCircleFill /> : ""} 
+          </div>
+          <div className="node-details">
+            <div className="node-name">{node.name}</div>
+            <div className="number-children">{numberOfChildren.number} nodes under</div>
+            <Menu changeTree={changeTree} />
+          </div>
+        </div>
+
+        {isExpanded && <div className="children">{children}</div>}
+
+        <ActionModal
+          handleClose={handleClose}
+          handleAction={handleAction}
+          actionName={actionName}
+          show={show}
+        />
       </div>
-      {children}
     </StyledNode>
   );
 }
