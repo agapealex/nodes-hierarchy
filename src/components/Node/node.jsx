@@ -75,7 +75,7 @@ function Node({ node, children }) {
         style={{ display: "block", position: "static", overflow: "inherit" }}
       >
         <div className="node">
-          <div className="expand-node" onClick={() => expandNode()}>
+          <div className="expand-node" onClick={expandNode}>
             {numberOfChildren.number > 0 ? (
               isExpanded ? (
                 <Icon.DashCircleFill />
