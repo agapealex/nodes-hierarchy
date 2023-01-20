@@ -5,7 +5,6 @@ const StyledNode = styled.li`
 
   .node {
     display: flex;
-    height: 60px;
   }
 
   .expand-node {
