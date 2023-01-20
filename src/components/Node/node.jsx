@@ -83,7 +83,7 @@ function Node({ node, children }) {
                 <Icon.PlusCircleFill />
               )
             ) : (
-              ""
+              null
             )}
           </div>
           <div className="node-details">

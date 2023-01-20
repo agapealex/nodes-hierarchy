@@ -58,7 +58,7 @@ const getRecursionNodes = (initialNodes, currentValue, accumulator) => {
     (node) => node.parent_node === currentValue.id
   );
 
-  let allChildren = children.map((child) => {
+  const allChildren = children.map((child) => {
     return getRecursionNodes(initialNodes, child, accumulator);
   });
 

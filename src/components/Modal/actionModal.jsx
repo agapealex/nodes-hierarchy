@@ -5,6 +5,12 @@ import Form from "react-bootstrap/Form";
 
 import { ADD, EDIT } from "../../common/constants";
 
+const convertUpperCamelCase = (text) => {
+  return text.replace(/\w+/g, function (w) {
+    return w[0].toUpperCase() + w.slice(1).toLowerCase();
+  });
+};
+
 const ActionModal = ({ handleAction, handleClose, actionName, show }) => {
   const [nameValue, setNameValue] = useState("");
 
@@ -17,7 +23,7 @@ const ActionModal = ({ handleAction, handleClose, actionName, show }) => {
         <Modal.Title>The tree will be modified</Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        Are you sure you want to {actionName} the node?
+        Are you sure you want to {actionName.toLowerCase()} the node?
         {(actionName === EDIT || actionName === ADD) && (
           <Form.Group>
             <Form.Label>Then type the name of node: </Form.Label>
@@ -43,7 +49,7 @@ const ActionModal = ({ handleAction, handleClose, actionName, show }) => {
             return action;
           }}
         >
-          Save Changes
+          {convertUpperCamelCase(actionName)} node
         </Button>
       </Modal.Footer>
     </Modal>

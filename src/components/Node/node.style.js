@@ -13,7 +13,7 @@ const StyledNode = styled.li`
     justify-content: center;
     align-items: center;
     width: 50px;
-    color: #989898;
+    color: #a8acb4;
   }
 
   .horizontal-line {
@@ -22,14 +22,14 @@ const StyledNode = styled.li`
   }
 
   .node-name {
-    color: #787878;
+    color: #a8acb4;
     font-size: 13px;
     font-weight: 500;
     font-family: "Open Sans", sans-serif;
   }
 
   .number-children {
-    color: #787878;
+    color: #a8acb4;
     font-size: 12px;
     font-weight: 300;
     font-family: "Open Sans", sans-serif;
