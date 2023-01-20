@@ -10,7 +10,7 @@ const StyledNode = styled.div`
 
   .expand-node {
     width: 50px;
-    background-color: red;
+    background-color: #DCDCDC;
     margin: 10px 0 10px 0;
   }
 
@@ -21,7 +21,9 @@ const StyledNode = styled.div`
     width: 100%;
   }
 
-  .children{
+  .three-dots{
+    color: #DCDCDC;
+    margin-top: 15px;
   }
 `;
 

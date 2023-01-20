@@ -71,7 +71,7 @@ function Node({ node, children }) {
     <StyledNode>
       <div
         className="modal show"
-        style={{ display: "block", position: "initial" }}
+        style={{ display: "block", position: "static", overflow: "inherit" }}
       >
         <div className="node">
           <div className="expand-node" onClick={() => expandNode()}>
@@ -80,13 +80,12 @@ function Node({ node, children }) {
           <div className="node-details">
             {node.name} - {numberOfChildren.number}
           </div>
-          <button onClick={() => changeTree(ADD)}> add</button>
-          <button onClick={() => changeTree(EDIT)}> edit</button>
-          <button onClick={() => changeTree(DELETE)}> delete</button>
+          <Menu
+            changeTree={changeTree}
+          />
         </div>
-
+        
         {isExpanded && <div className="children">{children}</div>}
-        <Menu/>
 
         <ActionModal
           handleClose={handleClose}
