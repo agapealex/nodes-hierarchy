@@ -70,44 +70,33 @@ function Node({ node, className, children }) {
 
   return (
     <StyledNode>
-      <div
-        className='node-container show'
-      >
-        <div className="node">
-          <div className="expand-node" onClick={expandNode}>
-            {numberOfChildren.number > 0 ? (
-              isExpanded ? (
-                <>
-                <Icon.DashCircleFill className="expand-icon"/>
-                <div className="expand-line">
-
-                </div>
-                </>
-              ) : (
-                <Icon.PlusCircleFill className="expand-icon"/>
-              )
+      <div className="node">
+        <div className="expand-node" onClick={expandNode}>
+          {numberOfChildren.number > 0 ? (
+            isExpanded ? (
+              <Icon.DashCircleFill className="expand-icon" />
             ) : (
-              null
-            )}
-          </div>
-          <div className="node-details">
-            <div className="node-name">{node.name}</div>
-            <div className="number-children">
-              {numberOfChildren.number} nodes under
-            </div>
-            <Menu changeTree={changeTree} />
-          </div>
+              <Icon.PlusCircleFill className="expand-icon" />
+            )
+          ) : null}
         </div>
-
-        {isExpanded && <ul className={`children ${className}`}>{children}</ul>}
-
-        <ActionModal
-          handleClose={handleClose}
-          handleAction={handleAction}
-          actionName={actionName}
-          show={show}
-        />
+        <div className="node-details">
+          <div className="node-name">{node.name}</div>
+          <div className="number-children">
+            {numberOfChildren.number} nodes under
+          </div>
+          <Menu changeTree={changeTree} />
+        </div>
       </div>
+
+      {isExpanded && <ul className={`children ${className}`}>{children}</ul>}
+
+      <ActionModal
+        handleClose={handleClose}
+        handleAction={handleAction}
+        actionName={actionName}
+        show={show}
+      />
     </StyledNode>
   );
 }

@@ -41,7 +41,7 @@ function Main({}) {
 
   return (
     <StyledMain>
-      <ul>
+      <ul className="tree-container">
         {list && list.length !== 0 && list.map((x) => recursion(x))}
       </ul>
     </StyledMain>
