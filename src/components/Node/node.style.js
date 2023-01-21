@@ -5,40 +5,28 @@ const StyledNode = styled.li`
 
   .node {
     display: flex;
+
+    .expand-node {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 50px;
+      color: #a8acb4;
+
+      .expand-icon{
+        line-height: 28px;
+      }
+    }
   }
 
-  .expand-node {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 50px;
-    color: #a8acb4;
+  .children.tree{
+    padding-left: 22px;
   }
-
-  .horizontal-line {
-    position: absolute;
-    background-color: red;
-  }
-
-  .node-name {
-    color: #a8acb4;
-    font-size: 13px;
-    font-weight: 500;
-    font-family: "Open Sans", sans-serif;
-  }
-
-  .number-children {
-    color: #a8acb4;
-    font-size: 12px;
-    font-weight: 300;
-    font-family: "Open Sans", sans-serif;
-  }
-
+  
   .node-details {
     display: flex;
     align-items: center;
     position: relative;
-    margin: 10px 0 10px 0;
     padding-left: 30px;
     height: 40px;
     width: 100%;
@@ -55,6 +43,22 @@ const StyledNode = styled.li`
       &:nth-child(2) {
         margin-right: 30px;
       }
+    }
+
+    .node-name {
+      color: #a8acb4;
+      font-size: 13px;
+      font-weight: 500;
+      font-family: "Open Sans", sans-serif;
+      user-select: none;
+    }
+
+    .number-children {
+      color: #a8acb4;
+      font-size: 12px;
+      font-weight: 300;
+      font-family: "Open Sans", sans-serif;
+      user-select: none;
     }
   }
 

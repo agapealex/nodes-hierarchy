@@ -8,7 +8,7 @@ import { ADD, DELETE, EDIT } from "../../common/constants";
 import { getNumberOfChildren } from "./helpers";
 import Menu from "../Menu/menu";
 
-function Node({ node, children }) {
+function Node({ node, className, children }) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [show, setShow] = useState(false);
   const [handleAction, setHandleAction] = useState(() => {});
@@ -70,40 +70,33 @@ function Node({ node, children }) {
 
   return (
     <StyledNode>
-      <div
-        className="node-container show"
-        style={{ display: "block", position: "static", overflow: "inherit" }}
-      >
-        <div className="node">
-          <div className="expand-node" onClick={expandNode}>
-            {numberOfChildren.number > 0 ? (
-              isExpanded ? (
-                <Icon.DashCircleFill />
-              ) : (
-                <Icon.PlusCircleFill />
-              )
+      <div className="node">
+        <div className="expand-node" onClick={expandNode}>
+          {numberOfChildren.number > 0 ? (
+            isExpanded ? (
+              <Icon.DashCircleFill className="expand-icon" />
             ) : (
-              null
-            )}
-          </div>
-          <div className="node-details">
-            <div className="node-name">{node.name}</div>
-            <div className="number-children">
-              {numberOfChildren.number} nodes under
-            </div>
-            <Menu changeTree={changeTree} />
-          </div>
+              <Icon.PlusCircleFill className="expand-icon" />
+            )
+          ) : null}
         </div>
-
-        {isExpanded && <ul className="children">{children}</ul>}
-
-        <ActionModal
-          handleClose={handleClose}
-          handleAction={handleAction}
-          actionName={actionName}
-          show={show}
-        />
+        <div className="node-details">
+          <div className="node-name">{node.name}</div>
+          <div className="number-children">
+            {numberOfChildren.number} nodes under
+          </div>
+          <Menu changeTree={changeTree} />
+        </div>
       </div>
+
+      {isExpanded && <ul className={`children ${className}`}>{children}</ul>}
+
+      <ActionModal
+        handleClose={handleClose}
+        handleAction={handleAction}
+        actionName={actionName}
+        show={show}
+      />
     </StyledNode>
   );
 }
