@@ -7,7 +7,7 @@ import { formatAsTreeData, data } from "./helpers";
 
 const recursion = (node) => {
   return (
-    <Node node={node}>
+    <Node node={node} className={node.parent_node === null ? "tree" : ""}>
       {node.children.length !== 0 && (
         <>{node.children.map((child) => recursion(child))}</>
       )}

@@ -7,17 +7,16 @@ const StyledNode = styled.li`
     display: flex;
   }
 
+  .children.tree{
+    padding-left: 22px;
+  }
+
   .expand-node {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 50px;
     color: #a8acb4;
-  }
-
-  .horizontal-line {
-    position: absolute;
-    background-color: red;
   }
 
   .node-name {
@@ -38,7 +37,7 @@ const StyledNode = styled.li`
     display: flex;
     align-items: center;
     position: relative;
-    margin: 10px 0 10px 0;
+    //margin: 10px 0 10px 0;//////////
     padding-left: 30px;
     height: 40px;
     width: 100%;
@@ -56,6 +55,10 @@ const StyledNode = styled.li`
         margin-right: 30px;
       }
     }
+  }
+
+  .expand-icon{
+    line-height: 28px;
   }
 
   .three-dots {

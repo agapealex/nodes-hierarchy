@@ -8,7 +8,7 @@ import { ADD, DELETE, EDIT } from "../../common/constants";
 import { getNumberOfChildren } from "./helpers";
 import Menu from "../Menu/menu";
 
-function Node({ node, children }) {
+function Node({ node, className, children }) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [show, setShow] = useState(false);
   const [handleAction, setHandleAction] = useState(() => {});
@@ -71,16 +71,20 @@ function Node({ node, children }) {
   return (
     <StyledNode>
       <div
-        className="node-container show"
-        style={{ display: "block", position: "static", overflow: "inherit" }}
+        className='node-container show'
       >
         <div className="node">
           <div className="expand-node" onClick={expandNode}>
             {numberOfChildren.number > 0 ? (
               isExpanded ? (
-                <Icon.DashCircleFill />
+                <>
+                <Icon.DashCircleFill className="expand-icon"/>
+                <div className="expand-line">
+
+                </div>
+                </>
               ) : (
-                <Icon.PlusCircleFill />
+                <Icon.PlusCircleFill className="expand-icon"/>
               )
             ) : (
               null
@@ -95,7 +99,7 @@ function Node({ node, children }) {
           </div>
         </div>
 
-        {isExpanded && <ul className="children">{children}</ul>}
+        {isExpanded && <ul className={`children ${className}`}>{children}</ul>}
 
         <ActionModal
           handleClose={handleClose}
