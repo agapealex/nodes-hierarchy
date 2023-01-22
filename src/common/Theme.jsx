@@ -9,9 +9,9 @@ const theme = {
   fonts: ["sans-serif", "Open Sans"],
   inputFields: {
     borderProps: {
-        border: `solid 1px #dcdcdc`,
-        webkit: `-1px 2px 3px 1px rgba(169, 169, 169, 0.21)`,
-        boxShadow: `-1px 2px 3px 1px rgba(169, 169, 169, 0.21)`
+      border: `solid 1px #dcdcdc`,
+      webkit: `-1px 2px 3px 1px rgba(169, 169, 169, 0.21)`,
+      boxShadow: `-1px 2px 3px 1px rgba(169, 169, 169, 0.21)`,
     },
   },
   size: {
@@ -20,6 +20,7 @@ const theme = {
     l: "22px",
     xl: "25px",
     xxl: "30px",
+    xxll: "40px",
   },
 };
 
