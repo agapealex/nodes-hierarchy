@@ -28,8 +28,8 @@ const StyledNode = styled.li`
       display: flex;
       align-items: center;
       position: relative;
-      padding-left: ${size.xxl};
-      height: 40px;
+      padding-left: ${size.xl};
+      height: ${size.xxll};
       width: 100%;
       border: ${inputFields.borderProps.border};
       -webkit-box-shadow: ${inputFields.borderProps.webkit};
@@ -46,11 +46,17 @@ const StyledNode = styled.li`
         }
       }
 
+      .dropdown-menu-container {
+        min-width: 100px;
+        inset: auto 0px auto auto;
+        margin-left: 0px;
+      }
+
       .node-name {
         color: ${colors.gray};
         font-size: 13px;
         font-weight: 500;
-        font-family: ${fonts[0], fonts[1]};
+        font-family: ${(fonts[0], fonts[1])};
         user-select: none;
       }
 
@@ -58,7 +64,7 @@ const StyledNode = styled.li`
         color: ${colors.gray};
         font-size: 12px;
         font-weight: 300;
-        font-family: ${fonts[0], fonts[1]};
+        font-family: ${(fonts[0], fonts[1])};
         user-select: none;
       }
     }

@@ -4,26 +4,26 @@ import Dropdown from "react-bootstrap/Dropdown";
 import CustomToggle from "./CustomToggle";
 import CustomMenu from "./CustomMenu";
 import { ADD, DELETE, EDIT } from "../../common/constants";
+import { convertUpperCamelCase } from "../../common/utils";
 
 const Menu = ({ changeTree }) => {
-  return (
-    <div className="d-flex">
-      <Dropdown>
-        <Dropdown.Toggle as={CustomToggle} id="dropdown-custom-components" />
+  const actionList = [ADD, EDIT, DELETE];
 
-        <Dropdown.Menu as={CustomMenu}>
-          <Dropdown.Item onClick={() => changeTree(ADD)} eventKey="1">
-            Add
+  return (
+    <Dropdown>
+      <Dropdown.Toggle as={CustomToggle} variant="success" />
+
+      <Dropdown.Menu as={CustomMenu} className="dropdown-menu-container">
+        {actionList.map((action, index) => (
+          <Dropdown.Item
+            onClick={() => changeTree(action)}
+            eventKey={`action-${index}`}
+          >
+            {convertUpperCamelCase(action)}
           </Dropdown.Item>
-          <Dropdown.Item onClick={() => changeTree(EDIT)} eventKey="2">
-            Edit
-          </Dropdown.Item>
-          <Dropdown.Item onClick={() => changeTree(DELETE)} eventKey="2">
-            Delete
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-    </div>
+        ))}
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 

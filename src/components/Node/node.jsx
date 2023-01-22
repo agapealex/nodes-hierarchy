@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import StyledNode from "./node.style";
 import { useDispatch } from "react-redux";
-import ActionModal from "../Modal/actionModal";
 import * as Icon from "react-bootstrap-icons";
 
+import ActionModal from "../Modal/actionModal";
 import { ADD, DELETE, EDIT } from "../../common/constants";
 import { getNumberOfChildren } from "./helpers";
 import Menu from "../Menu/menu";
@@ -11,7 +11,7 @@ import Menu from "../Menu/menu";
 function Node({ node, className, children }) {
   const [isExpanded, setIsExpanded] = useState(true);
   const [show, setShow] = useState(false);
-  const [handleAction, setHandleAction] = useState(() => {});
+  const [handleAction, setHandleAction] = useState(null);
   const [actionName, setActionName] = useState("");
 
   const dispatch = useDispatch();
@@ -54,7 +54,6 @@ function Node({ node, className, children }) {
 
     if (actionName === DELETE)
       return setHandleAction(() => dispatchAction(actionName, node));
-    // it is calling action if is not a callback
     else if (actionName === ADD) {
       return setHandleAction(() => addNode);
     } else if (actionName === EDIT) {
@@ -91,12 +90,14 @@ function Node({ node, className, children }) {
 
       {isExpanded && <ul className={`children ${className}`}>{children}</ul>}
 
-      <ActionModal
-        handleClose={handleClose}
-        handleAction={handleAction}
-        actionName={actionName}
-        show={show}
-      />
+      {handleAction && (
+        <ActionModal
+          handleClose={handleClose}
+          handleAction={handleAction}
+          actionName={actionName}
+          show={show}
+        />
+      )}
     </StyledNode>
   );
 }
