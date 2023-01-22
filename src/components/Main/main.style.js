@@ -1,60 +1,65 @@
-import styled from "styled-components";
+import styled, {css} from "styled-components";
 
 const StyledMain = styled.div`
-  padding-right: 30px;
-  width: 700px;
 
-  .tree-container{
-    padding: 30px 0;
-
-    > * {
-        margin-top:-20px;
-      }
-  } 
+  ${
+    ({ theme: { colors, size}}) => css`
+    padding-right: ${size.xxl};
+    width: 700px;
   
-  ul.tree,
-  ul.tree ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  ul.tree ul {
-    margin-left: 22px;
-  }
-  ul.tree li {
-    margin: -15px 0 0 0;
-    padding-left: 7px;
-    line-height: 20px;
-    color: #369;
-    font-weight: bold;
-    border-left: 1px solid #a8acb4;
-
-    &:last-child {
-        border-left: none;
-        margin-top: -38px;
-    
-        &:before {
-          height: 45px;
+    .tree-container{
+      padding: ${size.xl} 0;
+  
+      > * {
+          margin-top: -${size.m};
         }
-      }
-
-      &:before {
-        border-bottom: 1px solid #a8acb4;
-      }
-
-      &:last-child:before {
-        border-left: 1px solid #a8acb4;
-      }
-  }
-
-  li:before {
-    position: relative;
-    top: 25px;
-    left: -7px;
-    width: 22px;
-    content: "";
-    display: inline-block;
-    height: 25px;
+    } 
+    
+    ul.tree,
+    ul.tree ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    ul.tree ul {
+      margin-left: ${size.l};
+    }
+    ul.tree li {
+      margin: -15px 0 0 0;
+      padding-left: 7px;
+      line-height: ${size.m};
+      color: #369;
+      font-weight: bold;
+      border-left: 1px solid ${colors.gray};
+  
+      &:last-child {
+          border-left: none;
+          margin-top: -38px;
+      
+          &:before {
+            height: 45px;
+          }
+        }
+  
+        &:before {
+          border-bottom: 1px solid ${colors.gray};
+        }
+  
+        &:last-child:before {
+          border-left: 1px solid ${colors.gray};
+        }
+    }
+  
+    li:before {
+      position: relative;
+      top: ${size.xl};
+      left: -7px;
+      width: ${size.l};
+      content: "";
+      display: inline-block;
+      height: ${size.xl};
+    }
+    `
   }
 `;
 

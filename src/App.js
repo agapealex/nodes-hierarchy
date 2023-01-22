@@ -1,12 +1,14 @@
 import "./App.css";
 import React from "react";
 import Main from "./components/Main/main";
+import Theme from "./common/Theme";
 
 function App() {
-
   return (
     <div className="App">
-      <Main />
+      <Theme>
+        <Main />
+      </Theme>
     </div>
   );
 }
