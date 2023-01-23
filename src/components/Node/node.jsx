@@ -48,7 +48,7 @@ function Node({ node, className, children }) {
     setIsExpanded(!isExpanded);
   };
 
-  const changeTree = (actionName) => {
+  const setActions = (actionName) => {
     setActionName(actionName);
     setShow(true);
 
@@ -84,7 +84,7 @@ function Node({ node, className, children }) {
           <div className="number-children">
             {numberOfChildren.number} nodes under
           </div>
-          <Menu changeTree={changeTree} />
+          <Menu setActions={setActions} />
         </div>
       </div>
 

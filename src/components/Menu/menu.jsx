@@ -6,7 +6,7 @@ import CustomMenu from "./CustomMenu";
 import { ADD, DELETE, EDIT } from "../../common/constants";
 import { convertUpperCamelCase } from "../../common/utils";
 
-const Menu = ({ changeTree }) => {
+const Menu = ({ setActions }) => {
   const actionList = [ADD, EDIT, DELETE];
 
   return (
@@ -16,7 +16,7 @@ const Menu = ({ changeTree }) => {
       <Dropdown.Menu as={CustomMenu} className="dropdown-menu-container">
         {actionList.map((action, index) => (
           <Dropdown.Item
-            onClick={() => changeTree(action)}
+            onClick={() => setActions(action)}
             eventKey={`action-${index}`}
           >
             {convertUpperCamelCase(action)}
