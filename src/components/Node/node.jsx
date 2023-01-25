@@ -96,6 +96,7 @@ function Node({ node, className, children }) {
           handleAction={handleAction}
           actionName={actionName}
           show={show}
+          name={node.name}
         />
       )}
     </StyledNode>

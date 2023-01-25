@@ -6,8 +6,8 @@ import Form from "react-bootstrap/Form";
 import { convertUpperCamelCase } from "../../common/utils";
 import { ADD, EDIT } from "../../common/constants";
 
-const ActionModal = ({ handleAction, handleClose, actionName, show }) => {
-  const [nameValue, setNameValue] = useState("");
+const ActionModal = ({ handleAction, handleClose, actionName, show, name }) => {
+  const [nameValue, setNameValue] = useState(name);
   const inputRef = useRef();
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const ActionModal = ({ handleAction, handleClose, actionName, show }) => {
       <Form
         onSubmit={(event) => {
           const action = handleAction(nameValue);
-          setNameValue("");
+          setNameValue(nameValue);
           event.preventDefault();
           event.stopPropagation();
 
