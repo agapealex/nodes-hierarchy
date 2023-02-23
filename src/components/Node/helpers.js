@@ -8,3 +8,17 @@ export const getNumberOfChildren = (node, accumulator) => {
     }
   };
 
+export function reducer(state, action) {
+  switch (action.type) {
+    case "EXPANDED":
+      return { ...state, isExpanded: !state.isExpanded };
+    case "SHOW":
+      return { ...state, show: action.payload };
+    case "ACTION_NAME":
+      return { ...state, actionName: action.payload };
+    case "HANDLE_ACTION":
+      return { ...state, handleAction: action.payload };
+    default:
+      return state;
+  }
+}
